@@ -1,0 +1,41 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": ["standard", "plugin:prettier/recommended"],
+    "plugins": ["prettier"],
+    "overrides": [
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "no-console": "warn",
+        "prettier/prettier": [
+            "warn",
+            {
+                "arrowParens": "avoid",
+                "bracketSameLine": false,
+                "bracketSpacing": true,
+                "endOfLine": "auto",
+                "printWidth": 80,
+                "semi": false,
+                "singleQuote": true,
+                "tabWidth": 2,
+                "trailingComma": "none",
+                "useTabs": true
+            }
+        ],      
+        "no-unused-vars": [
+            "warn",
+            {
+              "args": "after-used",
+              "ignoreRestSiblings": false,
+              "argsIgnorePattern": "^_.*?$"
+            }
+          ]
+    }
+}
