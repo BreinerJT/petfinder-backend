@@ -11,6 +11,7 @@ app.use(express.json())
 
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/pet', require('./routes/pet'))
+app.use('/api/message', require('./routes/messages'))
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
