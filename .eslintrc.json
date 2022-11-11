@@ -36,6 +36,7 @@
               "ignoreRestSiblings": false,
               "argsIgnorePattern": "^_.*?$"
             }
-          ]
+        ],
+        "prefer-promise-reject-errors": 0
     }
 }
