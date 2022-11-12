@@ -10,10 +10,14 @@ const validarJWT = (req, res, next) => {
 	}
 
 	try {
-		const { uid, name } = jwt.verify(token, process.env.JWT_PRIVATE_KEY)
-
+		const { uid, city, email, name } = jwt.verify(
+			token,
+			process.env.JWT_PRIVATE_KEY
+		)
 		req.uid = uid
 		req.name = name
+		req.city = city
+		req.email = email
 	} catch (error) {
 		return res.status(401).json({
 			ok: false,
