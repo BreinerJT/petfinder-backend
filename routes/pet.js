@@ -24,7 +24,7 @@ router.post(
 			max: 3
 		}),
 		check('name', 'Es necesario ingresar un nombre').not().isEmpty(),
-		check('photoUrl', 'Es necesario agregar entre 1 y 4 fotos.').isArray({
+		check('photos', 'Es necesario agregar entre 1 y 4 fotos.').isArray({
 			min: 1,
 			max: 4
 		}),

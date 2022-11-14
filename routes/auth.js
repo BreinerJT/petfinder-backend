@@ -8,7 +8,10 @@ const { validarJWT } = require('../middlewares/validar-jwt')
 const {
 	crearUsuario,
 	loginUsuario,
-	revalidarToken
+	revalidarToken,
+	updateLikes,
+	getLikedPets,
+	updatePhotoUrl
 } = require('../controllers/auth')
 
 const router = Router()
@@ -35,6 +38,10 @@ router.post(
 	loginUsuario
 )
 
+router.put('/:id', validarJWT, updateLikes)
+router.put('/photo/:id', validarJWT, updatePhotoUrl)
+
+router.get('/liked', validarJWT, getLikedPets)
 router.get('/renew', validarJWT, revalidarToken)
 
 module.exports = router

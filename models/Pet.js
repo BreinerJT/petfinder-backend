@@ -17,7 +17,7 @@ const PetSchema = Schema({
 		type: String,
 		required: true
 	},
-	photoUrl: {
+	photos: {
 		type: [String],
 		required: true
 	},

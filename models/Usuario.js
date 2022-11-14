@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose')
+const Pet = require('./Pet')
 
 const UsuarioSchema = Schema({
 	city: {
@@ -25,7 +26,13 @@ const UsuarioSchema = Schema({
 	photoUrl: {
 		type: String,
 		default: ''
-	}
+	},
+	liked: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Pet'
+		}
+	]
 })
 
 UsuarioSchema.method('toJSON', function () {

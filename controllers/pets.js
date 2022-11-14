@@ -21,7 +21,6 @@ const getOwnPets = async (req, res) => {
 
 const crearPet = async (req, res) => {
 	const pet = new Pet(req.body)
-
 	try {
 		pet.postedBy = req.uid
 
