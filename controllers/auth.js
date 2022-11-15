@@ -145,7 +145,7 @@ const updatePhotoUrl = async (req, res) => {
 			{ photoUrl: url },
 			{ new: true }
 		).populate('liked')
-		console.log(usuario)
+
 		const { city, name, photoUrl, id, liked, email } = usuario
 		const token = await generarJWT(id, city, email, name, photoUrl)
 

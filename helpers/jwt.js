@@ -8,7 +8,7 @@ const generarJWT = (uid, city, email, name, photoUrl) => {
 			payload,
 			process.env.JWT_PRIVATE_KEY,
 			{
-				expiresIn: '24h'
+				expiresIn: '365d'
 			},
 			(err, token) => {
 				if (err) {
