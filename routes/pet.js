@@ -18,7 +18,6 @@ router.post(
 	'/new',
 	[
 		check('age', 'Es necesaria ingresar una edad').not().isEmpty(),
-		check('city', 'Es necesario ingresar una ciudad.').not().isEmpty(),
 		check('description', 'Es necesario ingresar tres cualidades.').isArray({
 			min: 3,
 			max: 3

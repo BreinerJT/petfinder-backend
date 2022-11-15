@@ -1,6 +1,6 @@
 const Usuario = require('../models/Usuario')
-const Pet = require('../models/Pet')
 const bcrypt = require('bcrypt')
+
 const { generarJWT } = require('../helpers/jwt')
 
 const crearUsuario = async (req, res) => {
@@ -136,6 +136,34 @@ const updateLikes = async (req, res) => {
 	}
 }
 
+const updateDislikes = async (req, res) => {
+	const { uid } = req.body
+	const petId = req.params.id
+	try {
+		const usuario = await Usuario.findById(uid)
+		const newDislikes = [petId, ...usuario.disliked]
+
+		const usuarioActualizado = await Usuario.findByIdAndUpdate(
+			uid,
+			{ disliked: newDislikes },
+			{
+				new: true
+			}
+		).populate('liked')
+
+		res.status(200).json({
+			ok: true,
+			usuario: usuarioActualizado
+		})
+	} catch (error) {
+		console.log(error)
+		res.status(500).json({
+			ok: false,
+			msg: 'Hable con el administrador'
+		})
+	}
+}
+
 const updatePhotoUrl = async (req, res) => {
 	const uid = req.params.id
 	const { url } = req.body
@@ -189,6 +217,7 @@ module.exports = {
 	getLikedPets,
 	loginUsuario,
 	revalidarToken,
+	updateDislikes,
 	updateLikes,
 	updatePhotoUrl
 }

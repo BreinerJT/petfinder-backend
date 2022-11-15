@@ -4,9 +4,13 @@ const Usuario = require('../models/Usuario')
 const getPets = async (req, res) => {
 	const id = req.uid
 	const usuario = await Usuario.findById(id)
-	// const pets = await Pet.find({ postedBy: { $ne: id } })
+
 	const pets = await Pet.find({
-		$or: [{ postedBy: { $ne: id } }]
+		$and: [
+			{ postedBy: { $ne: id } },
+			{ _id: { $nin: usuario.liked } },
+			{ _id: { $nin: usuario.disliked } }
+		]
 	})
 
 	res.status(200).json({

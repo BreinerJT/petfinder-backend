@@ -7,14 +7,22 @@ const { validarCampos } = require('../middlewares/validar-campos')
 const { validarJWT } = require('../middlewares/validar-jwt')
 const {
 	crearUsuario,
+	getLikedPets,
 	loginUsuario,
 	revalidarToken,
+	updateDislikes,
 	updateLikes,
-	getLikedPets,
 	updatePhotoUrl
 } = require('../controllers/auth')
 
 const router = Router()
+
+router.get('/liked', validarJWT, getLikedPets)
+router.get('/renew', validarJWT, revalidarToken)
+
+router.put('/like/:id', validarJWT, updateLikes)
+router.put('/dislike/:id', validarJWT, updateDislikes)
+router.put('/photo/:id', validarJWT, updatePhotoUrl)
 
 router.post(
 	'/new',
@@ -37,11 +45,5 @@ router.post(
 	],
 	loginUsuario
 )
-
-router.put('/:id', validarJWT, updateLikes)
-router.put('/photo/:id', validarJWT, updatePhotoUrl)
-
-router.get('/liked', validarJWT, getLikedPets)
-router.get('/renew', validarJWT, revalidarToken)
 
 module.exports = router

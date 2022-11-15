@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose')
-const Pet = require('./Pet')
 
 const UsuarioSchema = Schema({
 	city: {
@@ -28,6 +27,12 @@ const UsuarioSchema = Schema({
 		default: ''
 	},
 	liked: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Pet'
+		}
+	],
+	disliked: [
 		{
 			type: Schema.Types.ObjectId,
 			ref: 'Pet'
