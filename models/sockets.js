@@ -2,10 +2,10 @@ class Sockets {
 	constructor(io) {
 		this.io = io
 
-		this.socketsEvent()
+		this.socketEvents()
 	}
 
-	socketEvent() {}
+	socketEvents() {}
 }
 
 module.exports = Sockets
