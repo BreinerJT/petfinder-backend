@@ -1,3 +1,4 @@
+// Servidor de Express
 const express = require('express')
 const socketio = require('socket.io')
 const cors = require('cors')
@@ -13,16 +14,22 @@ class Server {
 		dbConnection()
 
 		this.server = http.createServer(this.app)
-		this.io = socketio(this.server)
+		this.io = socketio(this.server, {
+			cors: {
+				origin: ['*'],
+				methods: ['GET', 'POST', 'PUT', 'DELETE']
+			}
+		})
 	}
 
 	middlewares() {
 		this.app.use(cors())
 		this.app.use(express.json())
 
+		// API Endpoints
 		this.app.use('/api/auth', require('../routes/auth'))
 		this.app.use('/api/pet', require('../routes/pet'))
-		this.app.use('/api/message', require('../routes/messages'))
+		this.app.use('/api/messages', require('../routes/messages'))
 	}
 
 	configurarSockets() {
@@ -34,7 +41,7 @@ class Server {
 
 		this.configurarSockets()
 
-		this.app.listen(this.port, () => {
+		this.server.listen(this.port, () => {
 			console.log('Server running in port:', this.port)
 		})
 	}

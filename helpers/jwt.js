@@ -22,4 +22,14 @@ const generarJWT = (uid, city, email, name, photoUrl) => {
 	})
 }
 
-module.exports = { generarJWT }
+const verificarJWT = (token = '') => {
+	try {
+		const { uid } = jwt.verify(token, process.env.JWT_PRIVATE_KEY)
+
+		return [true, uid]
+	} catch (error) {
+		return [false, null]
+	}
+}
+
+module.exports = { generarJWT, verificarJWT }

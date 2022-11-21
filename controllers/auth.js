@@ -97,7 +97,7 @@ const getLikedPets = async (req, res) => {
 
 		res.json({
 			ok: true,
-			liked: usuario.liked
+			liked: usuario.liked.slice(0, 15)
 		})
 	} catch (error) {
 		console.log(error)

@@ -37,6 +37,12 @@ const UsuarioSchema = Schema({
 			type: Schema.Types.ObjectId,
 			ref: 'Pet'
 		}
+	],
+	chats: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Usuario'
+		}
 	]
 })
 
