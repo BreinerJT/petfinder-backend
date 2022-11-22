@@ -15,7 +15,6 @@ class Sockets {
 	}
 
 	socketEvents() {
-		// On connection
 		this.io.on('connection', async socket => {
 			const [valido, uid] = verificarJWT(socket.handshake.query['x-token'])
 
@@ -26,15 +25,8 @@ class Sockets {
 
 			await usuarioConectado(uid)
 
-			// Unir al usuario a una sala de socket.io
 			socket.join(uid)
 
-			// TODO: Validar el JWT
-			// Si el token no es válido, desconectar
-
-			// TODO: Saber que usuario está activo mediante el UID
-
-			// TODO: Emitir todos los usuarios conectados
 			this.io.to(uid).emit('lista-chats', await getChats(uid))
 
 			socket.on('crear-chat', async payload => {
@@ -42,7 +34,6 @@ class Sockets {
 				this.io.to(uid).emit('lista-chats', await getChats(uid))
 			})
 
-			// TODO: Escuchar cuando el cliente manda un mensaje
 			socket.on('mensaje-personal', async payload => {
 				const mensaje = await grabarMensaje(payload)
 				this.io.to(payload.para).emit('mensaje-personal', mensaje)
@@ -55,9 +46,6 @@ class Sockets {
 					.emit('lista-chats', await getChats(payload.para))
 			})
 
-			// TODO: Disconnect
-			// Marcar en la BD que el usuario se desconecto
-			// TODO: Emitir todos los usuarios conectados
 			socket.on('disconnect', async () => {
 				await usuarioDesconectado(uid)
 				this.io.to(uid).emit('lista-chats', await getChats(uid))

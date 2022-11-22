@@ -44,9 +44,6 @@ const createChat = async (uid, payload) => {
 }
 
 const getChats = async uid => {
-	// const usuarios = await Usuario.find().sort('-online')
-
-	// return usuarios
 	const usuarios = await Usuario.findById(uid).populate('chats')
 	return usuarios.chats
 }
