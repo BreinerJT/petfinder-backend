@@ -23,7 +23,29 @@ class Server {
 	}
 
 	middlewares() {
-		this.app.use(cors())
+		this.app.use((req, res, next) => {
+			// res.header("Access-Control-Allow-Origin", "*");
+			const allowedOrigins = [
+				'http://localhost:3000',
+				'http://petfinder.onrender.com',
+				'https://petfinder.onrender.com'
+			]
+			const origin = req.headers.origin
+			if (allowedOrigins.includes(origin)) {
+				res.setHeader('Access-Control-Allow-Origin', origin)
+			}
+			res.header(
+				'Access-Control-Allow-Headers',
+				'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+			)
+			res.header('Access-Control-Allow-credentials', true)
+			res.header(
+				'Access-Control-Allow-Methods',
+				'GET, POST, PUT, DELETE, UPDATE'
+			)
+			next()
+		})
+
 		this.app.use(express.json())
 
 		// API Endpoints
